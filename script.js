@@ -1,6 +1,6 @@
 let map = null;
 let userLocation = null;
-const LocationCerca = { lat: -4.039247753979446, lon: -44.4684690662039 };
+const LocationCerca = { lat: -4.039247753979446, lon: -44.4684690662039 }; // loja cantanhede
 const geoLocation = navigator.geolocation;
 const radius = 50;
 
@@ -57,6 +57,23 @@ function removeAllMarkersAndCircles() {
         }
     });
 }
+
+function getDataLocal()
+{
+    const data = new Date();
+    const horario = data.toLocaleTimeString(); // 10/10/2022, 10:10:35
+
+    document.getElementById("relogio_ponto").innerText = horario;
+}
+
+setInterval(() => {
+    getDataLocal()
+}, 1000);
+
+function initializeComponents() {
+    createCircle(LocationCerca.lat, LocationCerca.lon, "Cerca de 50 Metros");
+    createMarker(userLocation.lat, userLocation.lon, "Sua Localização");
+}
 async function generateLocationAndMarker() {
      if (geoLocation) {
         geoLocation.getCurrentPosition(function(position) {
@@ -66,17 +83,13 @@ async function generateLocationAndMarker() {
                 lon: position.coords.longitude,
             }
 
-            console.log(userLocation);
-
             if (!map) {
                 initMap(userLocation.lat, userLocation.lon);
-                createCircle(LocationCerca.lat, LocationCerca.lon, "Cerca de 50 Metros");
-                createMarker(userLocation.lat, userLocation.lon, "Sua Localização");
+                initializeComponents();
             } else {
                 removeAllMarkersAndCircles();
                 map.setView([userLocation.lat, userLocation.lon], 16);
-                createCircle(LocationCerca.lat, LocationCerca.lon, "Cerca de 50 Metros");
-                createMarker(userLocation.lat, userLocation.lon, "Sua Localização");
+                initializeComponents();
             }
 
         }, function(error) {
@@ -92,14 +105,15 @@ generateLocationAndMarker();
 async function checkIsPoint() {
     if (geoLocation) {
         geoLocation.getCurrentPosition(function (position) {
-            var userLat = position.coords.latitude;
-            var userLon = position.coords.longitude;
+
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
 
             var distance = calculateDistance(
                 LocationCerca.lat,
                 LocationCerca.lon,
-                userLat,
-                userLon
+                latitude,
+                longitude
             );
 
             if (distance <= radius) {
