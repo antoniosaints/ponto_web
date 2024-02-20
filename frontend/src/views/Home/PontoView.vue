@@ -18,7 +18,7 @@
 
         <span
           href="#"
-          class="block mb-4 max-w-sm p-4 bg-blue-800 rounded-lg shadow dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="block mb-4 p-4 bg-blue-800 rounded-lg shadow dark:bg-gray-800 dark:hover:bg-gray-700"
         >
           <h5
             id="relogio_ponto"
@@ -36,7 +36,7 @@
             class="max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
           >
             <div class="h-80">
-              <div id="mapa" class="p-0 w-full h-full"></div>
+              <div id="mapa" class="p-0 w-full rounded-lg h-full"></div>
             </div>
           </div>
 
@@ -45,7 +45,7 @@
             type="button"
             class="my-2 text-white bg-gray-900 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
           >
-            Bater ponto
+            Registrar ponto
           </button>
           <button
             @click="centerUserLocation"
@@ -89,10 +89,10 @@
           type="button"
           class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
         >
-          <iconComponent icon="gears" />
+          <iconComponent icon="list-check" />
           <span
             class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-            >Configs</span
+            >Espelho</span
           >
         </button>
         <router-link
@@ -128,7 +128,7 @@ let iconMarker = L.icon({
   popupAnchor: [1, -34],
 });
 
-const cercas = ref([
+const cercasUserAutorized = ref([
   {
     latlon: [-4.03166873212282, -44.47302103897922],
     description: "Cerca de 50 Metros",
@@ -259,7 +259,7 @@ function removeAllMarkersAndCircles() {
 }
 
 function initializeComponents() {
-  cercas.value.forEach((cerca) => {
+  cercasUserAutorized.value.forEach((cerca) => {
     createCircle(cerca.latlon, cerca.radius, cerca.description, cerca.color);
   });
   createMarker(
@@ -271,7 +271,7 @@ function initializeComponents() {
 
 function verifyLocation() {
   let isLocationAutorized = [];
-  cercas.value.forEach((cerca) => {
+  cercasUserAutorized.value.forEach((cerca) => {
     const distance = calculateDistance(
       userLocation.value.lat,
       userLocation.value.lon,
