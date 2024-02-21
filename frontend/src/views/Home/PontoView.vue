@@ -1,112 +1,55 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="w-screen h-screen p-4 bg-blue-600">
-        <div class="flex items-center gap-4 mb-4">
-          <img
-            class="w-10 h-10 rounded-full"
-            src="../../assets/vue.svg"
-            alt=""
-          />
-          <div class="font-medium text-white dark:text-white">
-            <div>Antonio Costa dos Santos</div>
-            <div class="text-sm text-gray-300 dark:text-gray-400">
-              Último login: 23/05/2022
-            </div>
-          </div>
-        </div>
-
-        <span
-          href="#"
-          class="block mb-4 p-4 bg-blue-800 rounded-lg shadow dark:bg-gray-800 dark:hover:bg-gray-700"
-        >
-          <h5
-            id="relogio_ponto"
-            class="mb-2 text-4xl dark:text-white text-white font-bold tracking-tight"
-          >
-            {{ horario }}
-          </h5>
-          <p class="font-normal text-gray-300 dark:text-gray-400">
-            Horário atual
-          </p>
-        </span>
-
-        <div class="d-flex text-right p-0">
-          <div
-            class="max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-          >
-            <div class="h-80">
-              <div id="mapa" class="p-0 w-full rounded-lg h-full"></div>
-            </div>
-          </div>
-
-          <button
-            @click="verifyLocation"
-            type="button"
-            class="my-2 text-white bg-gray-900 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-          >
-            Registrar ponto
-          </button>
-          <button
-            @click="centerUserLocation"
-            type="button"
-            class="my-2 text-white bg-gray-900 hover:bg-gray-900 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-          >
-            <iconComponent
-              color="text-white"
-              icon="location-crosshairs"
-              size="text-l"
-            />
-          </button>
+  <div class="p-4 bg-blue-900">
+    <div class="flex items-center gap-4 mb-4">
+      <img class="w-10 h-10 rounded-full" src="../../assets/vue.svg" alt="" />
+      <div class="font-medium text-white dark:text-white">
+        <div>Antonio Costa dos Santos</div>
+        <div class="text-sm text-gray-300 dark:text-gray-400">
+          Último login: 23/05/2022
         </div>
       </div>
     </div>
-    <div
-      class="fixed bottom-0 left-0 z-50 w-full h-16 bg-blue-100 border-t border-blue-200 dark:bg-gray-700 dark:border-gray-600"
+
+    <span
+      href="#"
+      class="block mb-4 p-4 bg-blue-800 rounded-lg shadow dark:bg-gray-800 dark:hover:bg-gray-700"
     >
-      <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-        <button
-          type="button"
-          class="inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600"
-        >
-          <iconComponent icon="clock" />
-          <span
-            class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-            >Ponto</span
-          >
-        </button>
-        <button
-          type="button"
-          class="inline-flex flex-col items-center justify-center px-5 border-e border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600"
-        >
-          <iconComponent icon="file-lines" />
-          <span
-            class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-            >Relatório</span
-          >
-        </button>
-        <button
-          type="button"
-          class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-        >
-          <iconComponent icon="list-check" />
-          <span
-            class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-            >Espelho</span
-          >
-        </button>
-        <router-link
-          to="/home/perfil"
-          type="button"
-          class="inline-flex flex-col items-center justify-center px-5 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 group border-x dark:border-gray-600"
-        >
-          <iconComponent icon="user" />
-          <span
-            class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-            >Perfil</span
-          >
-        </router-link>
+      <h5
+        id="relogio_ponto"
+        class="mb-2 text-4xl dark:text-white text-white font-bold tracking-tight"
+      >
+        {{ horario }}
+      </h5>
+      <p class="font-normal text-gray-300 dark:text-gray-400">Horário atual</p>
+    </span>
+
+    <div class="d-flex text-right p-0">
+      <div
+        class="max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      >
+        <div class="h-80">
+          <div id="mapa" class="p-0 w-full rounded-lg h-full"></div>
+        </div>
       </div>
+
+      <button
+        @click="verifyLocation"
+        type="button"
+        class="my-2 text-white bg-gray-900 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+      >
+        Registrar ponto
+      </button>
+      <button
+        @click="centerUserLocation"
+        type="button"
+        class="my-2 text-white bg-gray-900 hover:bg-gray-900 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+      >
+        <iconComponent
+          color="text-white"
+          icon="location-crosshairs"
+          size="text-l"
+        />
+      </button>
     </div>
   </div>
 </template>
@@ -318,11 +261,6 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   var d = R * c; // Distância em metros
   return d;
 }
-
-geoLocation.watchPosition((position) => {
-  console.log(position.coords);
-  updateLocationUser(position);
-});
 
 onMounted(() => {
   generateLocationAndMarker();
