@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6">
+  <div class="p-6 bg-blue-900">
     <ol class="relative border-s border-gray-200 dark:border-gray-700">
       <li class="mb-10 ms-6">
         <span

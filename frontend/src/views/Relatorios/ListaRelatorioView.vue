@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 w-screen h-screen container">
+  <div class="p-4 bg-blue-900">
     <!-- Breadcrumb -->
     <nav
       class="flex px-5 py-3 mb-4 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
@@ -58,13 +58,13 @@
       <div class="mb-5">
         <label
           for="email"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class="block mb-2 text-sm font-medium text-gray-100 dark:text-white"
           >Your email</label
         >
         <input
           type="email"
           id="email"
-          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          class="shadow-sm bg-gray-50 border placeholder-gray-600 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
           placeholder="name@flowbite.com"
           required
         />
@@ -72,26 +72,28 @@
       <div class="mb-5">
         <label
           for="password"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class="block mb-2 text-sm font-medium text-gray-100 dark:text-white"
           >Your password</label
         >
         <input
           type="password"
           id="password"
-          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          placeholder="••••••••"
+          class="shadow-sm pla bg-gray-50 border placeholder-gray-500 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
           required
         />
       </div>
       <div class="mb-5">
         <label
           for="repeat-password"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class="block mb-2 text-sm font-medium text-gray-100 dark:text-white"
           >Repeat password</label
         >
         <input
           type="password"
           id="repeat-password"
-          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          placeholder="••••••••"
+          class="shadow-sm bg-gray-50 border placeholder-gray-500 border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
           required
         />
       </div>
@@ -107,7 +109,7 @@
         </div>
         <label
           for="terms"
-          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          class="ms-2 text-sm font-medium text-gray-100 dark:text-gray-300"
           >I agree with the
           <a href="#" class="text-blue-600 hover:underline dark:text-blue-500"
             >terms and conditions</a

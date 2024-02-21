@@ -73,7 +73,7 @@ let iconMarker = L.icon({
 
 const cercasUserAutorized = ref([
   {
-    latlon: [-4.03166873212282, -44.47302103897922],
+    latlon: [-4.030258062270483, -44.46540541962746],
     description: "Cerca de 50 Metros",
     radius: 50,
     color: "blue",
