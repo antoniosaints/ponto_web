@@ -1,10 +1,10 @@
 <template>
-  <div class="p-4 bg-blue-900">
+  <div class="p-4 bg-slate-300 dark:bg-blue-900">
     <div class="flex items-center gap-4 mb-4">
       <img class="w-10 h-10 rounded-full" src="../../assets/vue.svg" alt="" />
-      <div class="font-medium text-white dark:text-white">
+      <div class="font-medium text-gray-800 dark:text-white">
         <div>Antonio Costa dos Santos</div>
-        <div class="text-sm text-gray-300 dark:text-gray-400">
+        <div class="text-sm text-gray-500 dark:text-gray-400">
           Último login: 23/05/2022
         </div>
       </div>
@@ -12,7 +12,7 @@
 
     <span
       href="#"
-      class="block mb-4 p-4 bg-blue-800 rounded-lg shadow dark:bg-gray-800 dark:hover:bg-gray-700"
+      class="block mb-4 p-4 bg-teal-800 rounded-lg shadow dark:bg-teal-800 dark:hover:bg-gray-700"
     >
       <h5
         id="relogio_ponto"
@@ -35,14 +35,14 @@
       <button
         @click="verifyLocation"
         type="button"
-        class="my-2 text-white bg-gray-900 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+        class="my-2 text-white bg-green-600 hover:bg-green-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
       >
         Registrar ponto
       </button>
       <button
         @click="centerUserLocation"
         type="button"
-        class="my-2 text-white bg-gray-900 hover:bg-gray-900 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+        class="my-2 text-white bg-violet-900 hover:bg-violet-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
       >
         <iconComponent
           color="text-white"
@@ -58,8 +58,8 @@
 import { onBeforeMount, onMounted, ref } from "vue";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import iconComponent from "../../components/Fontawesome/iconComponent.vue";
-import MarkerIcon from "../../assets/marker-icon.png";
+import iconComponent from "@/components/Fontawesome/IconComponent.vue";
+import MarkerIcon from "@/assets/marker-icon.png";
 
 let map = null;
 const geoLocation = navigator.geolocation;

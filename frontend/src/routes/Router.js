@@ -25,7 +25,18 @@ const routes = [
                 path: '/espelho',
                 name: 'Espelho',
                 component: () => import('@/views/Espelho/EspelhoPontoView.vue')
-            }
+            },
+            { // Rotas de perfil
+                path: '/perfil',
+                name: 'Perfil',
+                children: [
+                    {
+                        path: '/perfil',
+                        name: 'Perfil',
+                        component: () => import('@/views/Perfil/ConfiguracoesView.vue')
+                    }
+                ]
+            },
         ]
     },
 ]
