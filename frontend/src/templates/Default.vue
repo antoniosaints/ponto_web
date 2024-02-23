@@ -1,13 +1,22 @@
 <script setup>
+import { onMounted, ref } from "vue";
 import ButtonDrawerMobile from "@/components/Flowbite/ButtonDrawerMobile.vue";
 import DrawerMobile from "@/components/Flowbite/DrawerMobile.vue";
 import iconComponent from "@/components/Fontawesome/IconComponent.vue";
 
+const computedDark = ref("");
+
+onMounted(() => {
+  computedDark.value = localStorage.getItem('darkMode') ? 'dark' : "";
+})
+const toggleDark = (value) => {
+    computedDark.value = value == true ? 'dark' : '';
+}
 </script>
 <template>
   <div :class="computedDark" class="bg-gray-100 text-white">
     
-    <router-view class="isMobile overflow-auto p-4"></router-view>
+    <router-view @toggleDarkMode="toggleDark" class="isMobile bg-slate-100 dark:bg-gray-900 overflow-auto p-4"></router-view>
 
     <DrawerMobile>
       <ButtonDrawerMobile to="/" nome="Ponto"

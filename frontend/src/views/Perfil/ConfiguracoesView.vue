@@ -1,5 +1,5 @@
 <template>
-  <div class="container flex flex-col bg-slate-300 dark:bg-slate-800">
+  <div class="flex flex-col bg-slate-300 dark:bg-slate-800">
     <label class="inline-flex items-center mb-5 cursor-pointer" @change="toggleDarkMode">
       <input type="checkbox" v-model="darkMode" value="" class="sr-only peer" />
       <div
@@ -27,7 +27,10 @@ import { ref } from 'vue';
 
 const darkMode = ref(localStorage.getItem('darkMode'));
 
+const emit = defineEmits(['toggleDarkMode']);
+
 const toggleDarkMode = () => {
+  emit('toggleDarkMode', darkMode.value);
   localStorage.setItem('darkMode', darkMode.value);
 }
 

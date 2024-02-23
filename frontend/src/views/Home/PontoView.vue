@@ -12,7 +12,7 @@
 
     <span
       href="#"
-      class="block mb-4 p-4 bg-teal-800 rounded-lg shadow dark:bg-teal-800 dark:hover:bg-gray-700"
+      class="block mb-4 p-4 bg-gray-800 rounded-lg shadow dark:bg-gray-600"
     >
       <h5
         id="relogio_ponto"
@@ -35,14 +35,14 @@
       <button
         @click="verifyLocation"
         type="button"
-        class="my-2 text-white bg-green-600 hover:bg-green-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+        class="my-2 text-white bg-green-600 hover:bg-green-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
       >
         Registrar ponto
       </button>
       <button
         @click="centerUserLocation"
         type="button"
-        class="my-2 text-white bg-violet-900 hover:bg-violet-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+        class="my-2 text-white bg-violet-900 hover:bg-violet-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mb-2 dark:bg-violet-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
       >
         <iconComponent
           color="text-white"
@@ -111,6 +111,9 @@ const centerUserLocation = () => {
 };
 const initMap = (lat, lon) => {
   map = L.map("mapa").setView([lat, lon], 18);
+  map.on("click", function (e) {
+      
+  })
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
   }).addTo(map);
@@ -156,6 +159,10 @@ function createCircle(latlon, radius, description = "", color) {
     radius: radius,
     color: color,
   });
+
+  circle.on("click", function (e) {
+    console.log(e.latlng);
+  })
 
   description != "" && circle.bindPopup(description);
 

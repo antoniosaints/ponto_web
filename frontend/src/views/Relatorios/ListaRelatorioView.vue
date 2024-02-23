@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-blue-900">
+  <div class="p-4">
     <!-- Breadcrumb -->
     <nav
       class="flex px-5 py-3 mb-4 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
@@ -122,6 +122,14 @@
       >
         Register new account
       </button>
+     
     </form>
   </div>
 </template>
+
+<script setup>
+
+const deletarRelatorio = () => {
+  alert("Relatorio deletado");
+}
+</script>
