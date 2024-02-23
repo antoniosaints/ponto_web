@@ -1,13 +1,21 @@
 <script setup>
-import ButtonDrawerMobile from "@/components/Flowbite/ButtonDrawerMobile.vue";
-import DrawerMobile from "@/components/Flowbite/DrawerMobile.vue";
-import iconComponent from "@/components/Fontawesome/IconComponent.vue";
+  import { ref } from "vue";
+  import ButtonDrawerMobile from "@/components/Flowbite/ButtonDrawerMobile.vue";
+  import DrawerMobile from "@/components/Flowbite/DrawerMobile.vue";
+  import iconComponent from "@/components/Fontawesome/IconComponent.vue";
 
+  const dark = ref(localStorage.getItem("darkMode") === "true" ? "dark" : "");
+
+  const updateTheme = (valor) => {
+    dark.value = valor ? "dark" : "";
+  };
 </script>
 <template>
-  <div :class="computedDark" class="bg-gray-100 text-white">
-    
-    <router-view class="isMobile overflow-auto p-4"></router-view>
+  <div :class="dark" class="bg-gray-100 text-white">
+    <router-view
+      @darkMode="updateTheme"
+      class="isMobile overflow-auto p-4"
+    ></router-view>
 
     <DrawerMobile>
       <ButtonDrawerMobile to="/" nome="Ponto"
@@ -26,7 +34,7 @@ import iconComponent from "@/components/Fontawesome/IconComponent.vue";
   </div>
 </template>
 <style scoped>
-.isMobile {
-  height: calc(100vh - 64px);
-}
+  .isMobile {
+    height: calc(100vh - 64px);
+  }
 </style>

@@ -12,7 +12,7 @@
 
     <span
       href="#"
-      class="block mb-4 p-4 bg-teal-800 rounded-lg shadow dark:bg-teal-800 dark:hover:bg-gray-700"
+      class="block mb-4 p-4 bg-sky-700 rounded-lg shadow dark:bg-sky-700"
     >
       <h5
         id="relogio_ponto"
@@ -20,7 +20,7 @@
       >
         {{ horario }}
       </h5>
-      <p class="font-normal text-gray-300 dark:text-gray-400">Horário atual</p>
+      <p class="font-normal text-gray-300 dark:text-gray-300">Horário atual</p>
     </span>
 
     <div class="d-flex text-right p-0">
@@ -28,21 +28,21 @@
         class="max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       >
         <div class="h-80">
-          <div id="mapa" class="p-0 w-full rounded-lg h-full"></div>
+          <div ref="mapa" class="p-0 w-full rounded-lg h-full"></div>
         </div>
       </div>
 
       <button
         @click="verifyLocation"
         type="button"
-        class="my-2 text-white bg-green-600 hover:bg-green-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+        class="my-2 text-white bg-green-600 hover:bg-green-900 focus:outline-none focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-cyan-600 dark:hover:bg-cyan-700"
       >
         Registrar ponto
       </button>
       <button
         @click="centerUserLocation"
         type="button"
-        class="my-2 text-white bg-violet-900 hover:bg-violet-600 focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+        class="my-2 text-white bg-violet-900 hover:bg-violet-600 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mb-2 dark:bg-emerald-600 dark:hover:bg-emerald-700"
       >
         <iconComponent
           color="text-white"
@@ -55,221 +55,205 @@
 </template>
 
 <script setup>
-import { onBeforeMount, onMounted, ref } from "vue";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import iconComponent from "@/components/Fontawesome/IconComponent.vue";
-import MarkerIcon from "@/assets/marker-icon.png";
+  import { onMounted, ref } from "vue";
+  import iconComponent from "@/components/Fontawesome/IconComponent.vue";
+  import L from "leaflet";
+  import "leaflet/dist/leaflet.css";
+  import MarkerIcon from "@/assets/marker-icon.png";
 
-let map = null;
-const geoLocation = navigator.geolocation;
+  const horario = ref("...");
+  const userLocation = ref({ lat: null, lon: null });
+  let mapaContainer = null; //mapa
+  const geoLocation = navigator.geolocation; //geolocalização
+  const mapa = ref();
+  const cercasUserAutorized = ref([
+    {
+      latlon: [-4.028018584461849, -44.46539775893618],
+      description: "Cerca 2",
+      radius: 26,
+      color: "red",
+    },
+    {
+      latlon: [-4.037639011196118, -44.465870701830674],
+      description: "Rua ipanema",
+      radius: 20,
+      color: "orange",
+    },
+    {
+      latlon: [-4.029238264916777, -44.46241279292012],
+      description: "Rua do brejo",
+      radius: 20,
+      color: "green",
+    },
+    {
+      latlon: [-4.0392746735410725, -44.46849812891654],
+      description: "Central CAS",
+      radius: 50,
+      color: "purple",
+    },
+  ]);
+  let iconMarker = L.icon({
+    iconUrl: MarkerIcon,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  });
+  // -------------------------------------------------------//
+  function getDataLocal() {
+    // Relogio
+    const data = new Date();
+    horario.value = data.toLocaleTimeString(); // 10/10/2022, 10:10:35
+  }
 
-let iconMarker = L.icon({
-  iconUrl: MarkerIcon,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-});
+  setInterval(getDataLocal, 1000);
 
-const cercasUserAutorized = ref([
-  {
-    latlon: [-4.030258062270483, -44.46540541962746],
-    description: "Cerca de 50 Metros",
-    radius: 50,
-    color: "blue",
-  },
-  {
-    latlon: [-4.038317661861804, -44.46935476403667],
-    description: "Cerca 2",
-    radius: 26,
-    color: "red",
-  },
-  {
-    latlon: [-4.037639011196118, -44.465870701830674],
-    description: "Rua ipanema",
-    radius: 20,
-    color: "orange",
-  },
-  {
-    latlon: [-4.029238264916777, -44.46241279292012],
-    description: "Rua do brejo",
-    radius: 20,
-    color: "green",
-  },
-  {
-    latlon: [-4.0392746735410725, -44.46849812891654],
-    description: "Central CAS",
-    radius: 50,
-    color: "purple",
-  },
-]);
-const userLocation = ref({});
-const horario = ref("...");
+  function initializeComponents(lat, lon) {
+    createMarker(lat, lon, "Sua Localização");
+    userLocation.value = {
+      lat,
+      lon,
+    };
+    cercasUserAutorized.value.forEach((cerca) => {
+      createCircle(cerca.latlon, cerca.radius, cerca.description, cerca.color);
+    });
+  }
+  async function initMap(lat, lon) {
+    if (mapaContainer == null) {
+      mapaContainer = await L.map(mapa.value).setView([lat, lon], 18);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+      }).addTo(mapaContainer);
 
-const centerUserLocation = () => {
-  map.setView([userLocation.value.lat, userLocation.value.lon], 18);
-};
-const initMap = (lat, lon) => {
-  map = L.map("mapa").setView([lat, lon], 18);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
-  }).addTo(map);
-};
+      initializeComponents(lat, lon);
+    }
+  }
+  function createMapLayer() {
+    if (geoLocation) {
+      geoLocation.getCurrentPosition((position) => {
+        initMap(position.coords.latitude, position.coords.longitude);
+      });
+    }
+  }
 
-function getDataLocal() {
-  const data = new Date();
-  horario.value = data.toLocaleTimeString(); // 10/10/2022, 10:10:35
-}
+  const deleteMapa = () => {
+    if (mapaContainer != null) {
+      mapaContainer.remove();
+      mapaContainer = null;
+    }
+  };
 
-function generateLocationAndMarker() {
-  if (geoLocation) {
-    geoLocation.getCurrentPosition(
-      function (position) {
+  onMounted(() => {
+    deleteMapa();
+    createMapLayer();
+  });
+
+  function createCircle(latlon, radius, description = "", color) {
+    let circle = L.circle(latlon, {
+      radius: radius,
+      color: color,
+    });
+
+    description != "" && circle.bindPopup(description);
+
+    circle.addTo(mapaContainer);
+  }
+
+  function createMarker(lat, lon, description = "") {
+    let ponto = L.marker([lat, lon], { icon: iconMarker });
+
+    description != "" && ponto.bindPopup(description);
+
+    ponto.addTo(mapaContainer);
+  }
+
+  const updateLocationUser = async () => {
+    if (geoLocation) {
+      geoLocation.getCurrentPosition(async (position) => {
         userLocation.value = {
           lat: position.coords.latitude,
           lon: position.coords.longitude,
         };
-
-        if (!map) {
-          initMap(position.coords.latitude, position.coords.longitude);
-          initializeComponents();
-        } else {
-          removeAllMarkersAndCircles();
-          map.setView(
-            [position.coords.latitude, position.coords.longitude],
-            18
-          );
-          initializeComponents();
-        }
-      },
-      function (error) {
-        console.error("Erro ao obter a localização do usuário:", error);
-      }
-    );
-  } else {
-    console.error("Geolocalização não é suportada pelo seu navegador.");
-  }
-}
-
-function createCircle(latlon, radius, description = "", color) {
-  const circle = L.circle(latlon, {
-    radius: radius,
-    color: color,
-  });
-
-  description != "" && circle.bindPopup(description);
-
-  circle.addTo(map);
-}
-
-function createMarker(lat, lon, description = "") {
-  const ponto = L.marker([lat, lon], { icon: iconMarker });
-
-  description != "" && ponto.bindPopup(description);
-
-  ponto.addTo(map);
-}
-
-const updateLocationUser = (position) => {
-  userLocation.value = {
-    lat: position.coords.latitude,
-    lon: position.coords.longitude,
-  };
-
-  if (!map) {
-    generateLocationAndMarker();
-  } else {
-    map.eachLayer(function (layer) {
-      if (layer instanceof L.Marker) {
-        map.removeLayer(layer);
-      }
-    });
-    // map.setView([position.coords.latitude, position.coords.longitude], 18);
-    createMarker(
-      position.coords.latitude,
-      position.coords.longitude,
-      "Sua Localização"
-    );
-  }
-};
-
-function removeAllMarkersAndCircles() {
-  map.eachLayer(function (layer) {
-    if (layer instanceof L.Marker || layer instanceof L.Circle) {
-      map.removeLayer(layer);
-    }
-  });
-}
-
-function initializeComponents() {
-  cercasUserAutorized.value.forEach((cerca) => {
-    createCircle(cerca.latlon, cerca.radius, cerca.description, cerca.color);
-  });
-  createMarker(
-    userLocation.value.lat,
-    userLocation.value.lon,
-    "Sua Localização"
-  );
-}
-
-function verifyLocation() {
-  let isLocationAutorized = [];
-  cercasUserAutorized.value.forEach((cerca) => {
-    const distance = calculateDistance(
-      userLocation.value.lat,
-      userLocation.value.lon,
-      cerca.latlon[0],
-      cerca.latlon[1]
-    );
-
-    if (distance <= cerca.radius) {
-      isLocationAutorized.push({
-        isCheck: true,
-        description: cerca.description,
+        await mapaContainer.eachLayer(function (layer) {
+          if (layer instanceof L.Marker) {
+            layer.setLatLng([
+              position.coords.latitude,
+              position.coords.longitude,
+            ]);
+          }
+        });
       });
     } else {
-      isLocationAutorized.push({
-        isCheck: false,
-        description: cerca.description,
-      });
+      alert("Geolocalização não é suportada pelo seu navegador.");
     }
-  });
+  };
 
-  if (isLocationAutorized.find((item) => item.isCheck === true)) {
-    const valor = isLocationAutorized.find(
-      (item) => item.isCheck === true
-    ).description;
-    alert(`Ponto registrado no local de trabalho: ${valor}`);
-  } else {
-    alert("Você não está dentro de um local de trabalho cadastrado!");
+  const centerUserLocation = () => {
+    if (geoLocation) {
+      geoLocation.getCurrentPosition((position) => {
+        userLocation.value = {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        };
+        mapaContainer.setView(
+          [position.coords.latitude, position.coords.longitude],
+          18
+        );
+      });
+    } else {
+      alert("Geolocalização não é suportada pelo seu navegador.");
+    }
+  };
+
+  function verifyLocation() {
+    let isLocationAutorized = [];
+    cercasUserAutorized.value.forEach((cerca) => {
+      const distance = calculateDistance(
+        userLocation.value.lat,
+        userLocation.value.lon,
+        cerca.latlon[0],
+        cerca.latlon[1]
+      );
+
+      if (distance <= cerca.radius) {
+        // alert(`Ponto registrado no local de trabalho: ${cerca.description}`);
+        isLocationAutorized.push({
+          isCheck: true,
+          description: cerca.description,
+        });
+      } else {
+        // alert("Você não está dentro de um local de trabalho cadastrado!");
+        isLocationAutorized.push({
+          isCheck: false,
+          description: cerca.description,
+        });
+      }
+    });
+
+    if (isLocationAutorized.find((item) => item.isCheck === true)) {
+      const valor = isLocationAutorized.find(
+        (item) => item.isCheck === true
+      ).description;
+      alert(`Ponto registrado no local de trabalho: ${valor}`);
+    } else {
+      alert("Você não está dentro de um local de trabalho cadastrado!");
+    }
   }
-}
 
-function calculateDistance(lat1, lon1, lat2, lon2) {
-  generateLocationAndMarker();
-
-  var R = 6371000; // Raio médio da Terra em metros
-  var dLat = ((lat2 - lat1) * Math.PI) / 180;
-  var dLon = ((lon2 - lon1) * Math.PI) / 180;
-  var a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  var d = R * c; // Distância em metros
-  return d;
-}
-
-onMounted(() => {
-  generateLocationAndMarker();
-  setInterval(getDataLocal, 1000);
-});
-
-onBeforeMount(() => {
-  if (map) {
-    map.remove();
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    var R = 6371000; // Raio médio da Terra em metros
+    var dLat = ((lat2 - lat1) * Math.PI) / 180;
+    var dLon = ((lon2 - lon1) * Math.PI) / 180;
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distância em metros
+    return d;
   }
-});
+
+  setInterval(updateLocationUser, 3000);
 </script>
