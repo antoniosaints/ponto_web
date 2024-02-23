@@ -185,12 +185,15 @@
         <span class="sr-only">Open actions menu</span>
       </button>
     </div>
+    <ModalConfirm text-confirm="Deletar produto" text-button="Yes, delete" />
+    <ModalConfirm text-confirm="Apagar mensaem" text-button="no" />
   </div>
 </template>
 
 <script setup>
 import { initFlowbite } from 'flowbite';
 import { onMounted } from 'vue';
+import ModalConfirm from '../../components/Flowbite/ModalConfirm.vue';
 
 onMounted(() => {
   initFlowbite();
