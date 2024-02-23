@@ -2,7 +2,7 @@
     <router-link
       :to="to"
       type="button"
-      class="inline-flex flex-col items-center justify-center px-5 border-e border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600"
+      class="inline-flex flex-col items-center justify-center px-5 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600"
     >
       <slot></slot>
       <span

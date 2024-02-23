@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-slate-300 dark:bg-blue-900">
+  <div class="p-4">
     <div class="flex items-center gap-4 mb-4">
       <img class="w-10 h-10 rounded-full" src="../../assets/vue.svg" alt="" />
       <div class="font-medium text-gray-800 dark:text-white">
@@ -12,15 +12,15 @@
 
     <span
       href="#"
-      class="block mb-4 p-4 bg-sky-700 rounded-lg shadow dark:bg-sky-700"
+      class="block mb-4 p-4 bg-gray-300 rounded-lg shadow dark:bg-gray-700"
     >
       <h5
         id="relogio_ponto"
-        class="mb-2 text-4xl dark:text-white text-white font-bold tracking-tight"
+        class="mb-2 text-4xl dark:text-white text-gray-900 font-bold tracking-tight"
       >
         {{ horario }}
       </h5>
-      <p class="font-normal text-gray-300 dark:text-gray-300">Horário atual</p>
+      <p class="font-normal text-gray-800 dark:text-gray-300">Horário atual</p>
     </span>
 
     <div class="d-flex text-right p-0">

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-blue-900">
+  <div class="p-4">
     <!-- Breadcrumb -->
     <nav
       class="flex px-5 py-3 mb-4 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
@@ -47,142 +47,136 @@
             <a
               href="#"
               class="ms-1 text-sm font-medium text-gray-900 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
-              >Novo Relatorio</a
+              >Listagem de relatórios</a
             >
           </div>
         </li>
       </ol>
     </nav>
 
-    <form class="max-w-sm mx-auto">
-      <div class="mb-5">
-        <label
-          for="email"
-          class="block mb-2 text-sm font-medium text-gray-100 dark:text-white"
-          >Your email</label
-        >
-        <input
-          type="email"
-          id="email"
-          class="shadow-sm bg-gray-50 border placeholder-gray-600 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-          placeholder="name@flowbite.com"
-          required
-        />
-      </div>
-      <div class="mb-5">
-        <label
-          for="password"
-          class="block mb-2 text-sm font-medium text-gray-100 dark:text-white"
-          >Your password</label
-        >
-        <input
-          type="password"
-          id="password"
-          placeholder="••••••••"
-          class="shadow-sm pla bg-gray-50 border placeholder-gray-500 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-          required
-        />
-      </div>
-      <div class="mb-5">
-        <label
-          for="repeat-password"
-          class="block mb-2 text-sm font-medium text-gray-100 dark:text-white"
-          >Repeat password</label
-        >
-        <input
-          type="password"
-          id="repeat-password"
-          placeholder="••••••••"
-          class="shadow-sm bg-gray-50 border placeholder-gray-500 border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-          required
-        />
-      </div>
-      <div class="flex items-start mb-5">
-        <div class="flex items-center h-5">
-          <input
-            id="terms"
-            type="checkbox"
-            value=""
-            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-            required
-          />
-        </div>
-        <label
-          for="terms"
-          class="ms-2 text-sm font-medium text-gray-100 dark:text-gray-300"
-          >I agree with the
-          <a href="#" class="text-blue-600 hover:underline dark:text-blue-500"
-            >terms and conditions</a
-          ></label
-        >
-      </div>
-      <button
-        type="submit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <table
+        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
       >
-        Register new account
-      </button>
-    </form>
-    <Modal
-      colorButton="bg-red-500"
-      buttonName="Deletar Usuário"
-      modalName="Novo usuário"
-    >
-      <form class="max-w-full mx-auto">
-        <div class="mb-5">
-          <label
-            for="email"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Your email</label
-          >
-          <input
-            type="email"
-            id="email"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="name@flowbite.com"
-            required
-          />
-        </div>
-        <div class="mb-5">
-          <label
-            for="password"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Your password</label
-          >
-          <input
-            type="password"
-            id="password"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            required
-          />
-        </div>
-        <div class="flex items-start mb-5">
-          <div class="flex items-center h-5">
-            <input
-              id="remember"
-              type="checkbox"
-              value=""
-              class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-              required
-            />
-          </div>
-          <label
-            for="remember"
-            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >Remember me</label
-          >
-        </div>
-        <button
-          type="submit"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        <thead
+          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
         >
-          Submit
-        </button>
-      </form>
-    </Modal>
+          <tr>
+            <th scope="col" class="px-6 py-3">Product name</th>
+            <th scope="col" class="px-6 py-3">
+              <div class="flex items-center">
+                Color
+                <a href="#"
+                  ><svg
+                    class="w-3 h-3 ms-1.5"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"
+                    /></svg></a>
+              </div>
+            </th>
+            <th scope="col" class="px-6 py-3">
+              <div class="flex items-center">
+                Category
+                <a href="#"
+                  ><svg
+                    class="w-3 h-3 ms-1.5"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"
+                    /></svg></a>
+              </div>
+            </th>
+            <th scope="col" class="px-6 py-3">
+              <div class="flex items-center">
+                Price
+                <a href="#"
+                  ><svg
+                    class="w-3 h-3 ms-1.5"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z"
+                    /></svg></a>
+              </div>
+            </th>
+            <th scope="col" class="px-6 py-3">
+              <span class="sr-only">Edit</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th
+              scope="row"
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            >
+              Apple MacBook Pro 17"
+            </th>
+            <td class="px-6 py-4">Silver</td>
+            <td class="px-6 py-4">Laptop</td>
+            <td class="px-6 py-4">$2999</td>
+            <td class="px-6 py-4 text-right">
+              <a
+                href="#"
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >Edit</a
+              >
+            </td>
+          </tr>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th
+              scope="row"
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            >
+              Microsoft Surface Pro
+            </th>
+            <td class="px-6 py-4">White</td>
+            <td class="px-6 py-4">Laptop PC</td>
+            <td class="px-6 py-4">$1999</td>
+            <td class="px-6 py-4 text-right">
+              <a
+                href="#"
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >Edit</a
+              >
+            </td>
+          </tr>
+          <tr class="bg-white dark:bg-gray-800">
+            <th
+              scope="row"
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            >
+              Magic Mouse 2
+            </th>
+            <td class="px-6 py-4">Black</td>
+            <td class="px-6 py-4">Accessories</td>
+            <td class="px-6 py-4">$99</td>
+            <td class="px-6 py-4 text-right">
+              <a
+                href="#"
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >Edit</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script setup>
-  import Modal from "../../components/Flowbite/Modal.vue";
+import Modal from "../../components/Flowbite/Modal.vue";
 </script>
