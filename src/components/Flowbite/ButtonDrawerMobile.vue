@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
 defineProps({
     to: String,
     nome: String

@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-  import { ref, defineEmits } from "vue";
+  import { ref } from "vue";
 
   const darkMode = ref(localStorage.getItem("darkMode"));
   const emit = defineEmits(["toggleDarkMode", "darkMode"]);
