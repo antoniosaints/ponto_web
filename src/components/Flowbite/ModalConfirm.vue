@@ -10,7 +10,7 @@
         </button>
 
         <div :id="modalId" tabindex="-1" :class="{ hidden: !isModalOpen }"
-            class="flex overflow-y-auto bg-gray-900 bg-opacity-85 overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            class="flex overflow-y-auto bg-gray-900/80 overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <button type="button"
@@ -30,8 +30,8 @@
                                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{{ textConfirm }}</h3>
-                        <button @click="toggleModal" type="button"
-                            class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                        <button @click="confirmModal" type="button"
+                            class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                             {{ textButtonConfirm }}
                         </button>
                         <button @click="toggleModal" type="button"
@@ -64,6 +64,15 @@ defineProps({
         default: "Texto do botão confirmar (textButtonConfirm)",
     }
 })
+
+const emits = defineEmits([
+    'confirmed'
+])
+
+const confirmModal = () => {
+    emits('confirmed', true);
+    toggleModal();
+}
 
 const modalId = `modal_${Math.random().toString(36).substr(2, 9)}`;
 const isModalOpen = ref(false);

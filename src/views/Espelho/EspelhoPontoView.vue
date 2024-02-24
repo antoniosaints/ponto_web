@@ -1,45 +1,31 @@
 <template>
   <div class="p-4">
 
-    <div role="status"
-      class="max-w-full p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700">
-      <div class="flex items-center justify-between">
-        <div>
-          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-          <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-        </div>
-        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-      </div>
-      <div class="flex items-center justify-between pt-4">
-        <div>
-          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-          <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-        </div>
-        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-      </div>
-      <div class="flex items-center justify-between pt-4">
-        <div>
-          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-          <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-        </div>
-        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-      </div>
-      <div class="flex items-center justify-between pt-4">
-        <div>
-          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-          <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-        </div>
-        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-      </div>
-      <div class="flex items-center justify-between pt-4">
-        <div>
-          <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-          <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-        </div>
-        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-      </div>
-      <span class="sr-only">Loading...</span>
-    </div>
+    <FormContainer @submit="submited">
+      <FormRow>
+        <FormCol>
+          <InputTextForm v-model="dataForm.nome" label="Nome" type="text" placeholder="Nome" required />
+          <InputTextForm v-model="dataForm.email" label="Email" type="text" placeholder="E-mail" required />
+        </FormCol>
+      </FormRow>
+    </FormContainer>
 
   </div>
 </template>
+
+<script setup>
+import FormContainer from '@/components/Flowbite/Form/FormContainer.vue';
+import InputTextForm from '@/components/Flowbite/Form/InputTextForm.vue';
+import FormCol from '@/components/Flowbite/Form/FormCol.vue';
+import FormRow from '@/components/Flowbite/Form/FormRow.vue';
+import { ref } from 'vue';
+
+const dataForm = ref({
+  nome: "",
+  email: ""
+});
+
+const submited = () => {
+  alert(dataForm.value.nome + " - " + dataForm.value.email);
+}
+</script>

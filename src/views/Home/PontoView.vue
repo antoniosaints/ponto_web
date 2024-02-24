@@ -119,7 +119,7 @@
   }
   async function initMap(lat, lon) {
     if (mapaContainer == null) {
-      mapaContainer = await L.map(mapa.value).setView([lat, lon], 18);
+      mapaContainer = await L.map(mapa.value).setView([lat, lon], 16);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
           '<a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
@@ -197,7 +197,7 @@
         };
         mapaContainer.setView(
           [position.coords.latitude, position.coords.longitude],
-          18
+          16
         );
       });
     } else {

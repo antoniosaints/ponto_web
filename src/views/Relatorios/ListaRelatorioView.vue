@@ -111,7 +111,7 @@
     </div>
 
     <div data-dial-init class="fixed end-4 bottom-20 group">
-      <div id="speed-dial-menu-default" class="flex flex-col items-center hidden mb-4 space-y-2">
+      <div :class="hidden" class="flex flex-col items-center mb-4 space-y-2">
         <button type="button" data-tooltip-target="tooltip-share" data-tooltip-placement="left"
           class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
           <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -174,8 +174,9 @@
           <div class="tooltip-arrow" data-popper-arrow></div>
         </div>
       </div>
-      <button type="button" data-dial-toggle="speed-dial-menu-default" aria-controls="speed-dial-menu-default"
+      <button type="button"
         aria-expanded="false"
+        @click="toggleSpeedDial"
         class="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
         <svg class="w-5 h-5 transition-transform group-hover:rotate-45" aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -185,17 +186,22 @@
         <span class="sr-only">Open actions menu</span>
       </button>
     </div>
-    <ModalConfirm text-confirm="Deletar produto" text-button="Yes, delete" />
-    <ModalConfirm text-confirm="Apagar mensaem" text-button="no" />
+    <ModalConfirm @confirmed="gerarRelatorio" class="mt-4 justify-end w-full flex" text-confirm="Deseja gerar o relatório?" text-button-confirm="Gerar" text-cancel="Cancelar" text-button="Gerar PDF" />
   </div>
 </template>
 
 <script setup>
-import { initFlowbite } from 'flowbite';
-import { onMounted } from 'vue';
+import { ref } from 'vue';
 import ModalConfirm from '../../components/Flowbite/ModalConfirm.vue';
 
-onMounted(() => {
-  initFlowbite();
-})
+const gerarRelatorio = (e) => {
+  alert('Relatório gerado com sucesso!');
+}
+
+const hidden = ref("hidden");
+
+const toggleSpeedDial = () => {
+  hidden.value = hidden.value === "hidden" ? "" : "hidden";
+}
+
 </script>
