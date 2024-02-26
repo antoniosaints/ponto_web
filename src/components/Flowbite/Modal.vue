@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Modal toggle -->
-    <div class="flex justify-center m-5">
+    <div v-if="showButton" class="flex justify-center m-5">
       <button
         @click="toggleModal"
         type="button"
@@ -80,6 +80,10 @@ export default {
       required: true,
       default: "bg-blue-700",
     },
+    showButton: {
+      type: Boolean,
+      default: false,
+    }
   },
   setup() {
     const isModalOpen = ref(false);
