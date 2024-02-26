@@ -2,6 +2,31 @@
   <div class="p-4">
     <FormContainer @submit="submited">
       <FormRow>
+        <FormCol class="sm:grid-cols-3">
+          <InputTextForm
+            v-model="dataForm.nome"
+            label="Nome"
+            type="text"
+            placeholder="Nome"
+            required
+          />
+          <InputTextForm
+            v-model="dataForm.email"
+            label="Email"
+            type="text"
+            placeholder="E-mail"
+            required
+          />
+          <InputTextForm
+            v-model="dataForm.email"
+            label="Email"
+            type="text"
+            placeholder="E-mail"
+            required
+          />
+        </FormCol>
+      </FormRow>
+      <FormRow>
         <FormCol>
           <InputTextForm
             v-model="dataForm.nome"
