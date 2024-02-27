@@ -21,26 +21,21 @@ import FormCol from "@/components/Flowbite/Form/FormCol.vue";
 import FormRow from "@/components/Flowbite/Form/FormRow.vue";
 import { ref } from "vue";
 
-const radonUUID = () => {
-  const randomNumber = Math.floor(Math.random() * 10000000);
-  return randomNumber;
-}
+// stores
+import { userStore } from '@/stores/Usuarios/userStore.js'
+const storeUsers = userStore();
 
 const dataForm = ref({
-  id: "",
   name: "",
   color: "",
   category: "",
   price: "",
 });
 
-const emit = defineEmits(["newUser"]);
+const emit = defineEmits(["userCreated"]);
 
 const submited = async () => {
-  let relatorio = await JSON.parse(localStorage.getItem("dataForm")) || [];
-  dataForm.value.id = radonUUID();
-  relatorio.push(dataForm.value);
-  localStorage.setItem("dataForm", JSON.stringify(relatorio));
-  emit("newUser");
+  storeUsers.storeUser(dataForm.value);
+  emit("userCreated");
 };
 </script>

@@ -1,14 +1,21 @@
 <template>
-  <form @submit.prevent="SendForm" class="max-w-auto mx-auto gap-3">
+  <form ref="formulario" @submit.prevent="SendForm" class="max-w-auto mx-auto gap-3">
     <slot></slot>
-    <button class="bg-blue-700 mt-4 w-auto hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" type="submit">Enviar</button>
+    <button class="bg-blue-700 mt-4 w-auto hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+      type="submit">Enviar</button>
+    <button class="bg-amber-700 ml-3 mt-4 w-auto hover:bg-amber-700 text-white font-bold py-2 px-4 rounded-lg"
+      type="reset">Resetar</button>
   </form>
 </template>
 
 <script setup>
-  const emit = defineEmits(["submit"]);
+import { ref } from 'vue';
 
-  const SendForm = () => {
-    emit("submit");
-  };
+const emit = defineEmits(["submit"]);
+const formulario = ref(null);
+
+const SendForm = () => {
+  emit("submit");
+  formulario.value.reset();
+};
 </script>

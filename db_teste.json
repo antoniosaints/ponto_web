@@ -1,0 +1,19 @@
+{
+  "usuarios": [
+    {
+      "id": "21cf",
+      "name": "Laissa",
+      "color": "Branco",
+      "category": "Atendimento",
+      "price": "455"
+    },
+    {
+      "id": "b02d",
+      "name": "Antonio",
+      "color": "Branco",
+      "category": "NOC",
+      "price": "755"
+    }
+  ],
+  "enderecos": []
+}
