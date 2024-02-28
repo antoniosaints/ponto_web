@@ -19,7 +19,7 @@ import FormContainer from "@/components/Flowbite/Form/FormContainer.vue";
 import InputTextForm from "@/components/Flowbite/Form/InputTextForm.vue";
 import FormCol from "@/components/Flowbite/Form/FormCol.vue";
 import FormRow from "@/components/Flowbite/Form/FormRow.vue";
-import { ref } from "vue";
+import { onUpdated, ref } from "vue";
 
 // stores
 import { userStore } from '@/stores/Usuarios/userStore.js'
@@ -32,10 +32,27 @@ const dataForm = ref({
   price: "",
 });
 
+const props = defineProps({
+  editUser: {
+    type: String,
+    default: null
+  }
+})
+
+onUpdated(() => {
+  if (props.editUser) {
+    dataForm.value = storeUsers.users.find((user) => user.id === props.editUser);
+  }
+})
+
 const emit = defineEmits(["userCreated"]);
 
 const submited = async () => {
-  storeUsers.storeUser(dataForm.value);
+  if (props.editUser) {
+    storeUsers.updateUser(props.editUser, dataForm.value);
+  }else {
+    storeUsers.storeUser(dataForm.value);
+  }
   emit("userCreated");
 };
 </script>

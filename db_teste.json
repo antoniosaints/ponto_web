@@ -1,18 +1,18 @@
 {
   "usuarios": [
     {
-      "id": "21cf",
-      "name": "Laissa",
-      "color": "Branco",
-      "category": "Atendimento",
-      "price": "455"
+      "id": "f1b5",
+      "name": "Eduardo Oliveira",
+      "color": "Laranja",
+      "category": "NOC",
+      "price": "799"
     },
     {
       "id": "b02d",
-      "name": "Antonio",
+      "name": "Haildson",
       "color": "Branco",
       "category": "NOC",
-      "price": "755"
+      "price": "7855"
     }
   ],
   "enderecos": []

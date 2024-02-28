@@ -53,19 +53,19 @@
             <td class="px-6 py-4">{{ produto.price }}</td>
             <td class="px-6 py-4 text-right">
               <a href="javascript:void(0)" @click="storeUsers.deleteUser(produto.id)" class="font-medium mr-3 text-red-600 dark:text-red-500 hover:underline">Deletar</a>
-              <a href="javascript:void(0)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+              <a href="javascript:void(0)" @click="editarUsuario(produto.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
             </td>
           </tr>
         </tbody>
       </TableComponent>
     </div>
     <Modal ref="modalNovoUsuario" modalName="Novo usuário" buttonName="Novo usuário" colorButton="bg-blue-700">
-      <EspelhoPontoView @userCreated="modalNovoUsuario.toggleModal()" />
+      <EspelhoPontoView :editUser="usuario_editar" @userCreated="modalNovoUsuario.toggleModal()" />
     </Modal>
     <div data-dial-init class="fixed end-4 bottom-20 group">
       <button type="button"
         aria-expanded="false"
-        @click="modalNovoUsuario.toggleModal()"
+        @click="novoUsuario"
         class="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
         <svg class="w-5 h-5 transition-transform group-hover:rotate-45" aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -89,15 +89,20 @@ import { userStore } from '@/stores/Usuarios/userStore.js'
 const storeUsers = userStore();
 
 const modalNovoUsuario = ref(null); //  do caralho
+const usuario_editar = ref(null);
 
 onMounted(() => {
   storeUsers.getUsers();
 })
 
-const deleteUsuario = (id) => {
-  products.value = products.value.filter((item) => item.id !== id);
+const editarUsuario = (id) => {
+  usuario_editar.value = id
+  modalNovoUsuario.value.toggleModal()
+}
 
-  localStorage.setItem("dataForm", JSON.stringify(products.value));
+const novoUsuario = () => {
+  usuario_editar.value = null
+  modalNovoUsuario.value.toggleModal()
 }
 
 </script>

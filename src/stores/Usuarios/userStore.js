@@ -1,39 +1,34 @@
-import { defineStore } from "pinia";
 import { ref } from "vue";
+import { defineStore } from "pinia";
+import httpService from "@/services/http";
 
 export const userStore = defineStore("userStore", () => {
     const users = ref([]);
 
     const getUsers = async () => {
-        const response = await fetch("http://localhost:3000/usuarios")
-        const data = await response.json()
+        const data = await httpService("usuarios")
         users.value = data
         return data
     }
 
-    const storeUser = async (user) => {
-        await fetch("http://localhost:3000/usuarios", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user),
-        })
+    const getUser = async (id) => {
+        return await httpService(`usuarios/${id}`) 
+    }
 
+    const storeUser = async (user) => {
+        await httpService("usuarios", "POST", user)
+        await getUsers()
+    }
+
+    const updateUser = async (id, user) => {
+        await httpService(`usuarios/${id}`, "PATCH", user)
         await getUsers()
     }
 
     const deleteUser = async (id) => {
-        await fetch(`http://localhost:3000/usuarios/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(id),
-        })
-
+        await httpService(`usuarios/${id}`, "DELETE")
         await getUsers()
     }
 
-    return { users, getUsers, storeUser, deleteUser }
+    return { users, getUser, getUsers, storeUser, updateUser, deleteUser }
 })
