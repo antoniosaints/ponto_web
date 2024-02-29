@@ -3,23 +3,23 @@
     {
       "id": "f1b5",
       "name": "Eduardo Oliveira",
-      "color": "Laranja",
+      "color": "Cinza",
       "category": "NOC",
       "price": "7997"
     },
     {
       "id": "b02d",
-      "name": "Haildson",
+      "name": "Haildson SIlva",
       "color": "Branco",
       "category": "NOC",
       "price": "78552"
     },
     {
       "id": "d587",
-      "name": "Antonio",
+      "name": "Antonio Santos",
       "color": "Branco",
       "category": "NOC",
-      "price": "7775252"
+      "price": "77752"
     }
   ],
   "locais_trabalho": [
@@ -50,13 +50,6 @@
       "color": "cyan",
       "latlon": "-4.034811282796596, -44.46657394184906",
       "radius": "56"
-    },
-    {
-      "id": "b797",
-      "description": "Alves Cardoso",
-      "color": "blue",
-      "latlon": "-4.036816087254786, -44.467918625392564",
-      "radius": "30"
     }
   ]
 }
