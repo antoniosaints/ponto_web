@@ -14,23 +14,25 @@ const routes = [
         component: () => import("@/views/Home/PontoView.vue"),
       },
       {
-        // Rotas de relatórios
-        path: "/relatorios",
-        name: "Relatorios",
+        path: "/usuarios",
+        name: "Usuarios",
         children: [
           {
-            path: "/relatorios/lista",
+            path: "/usuarios/lista",
             name: "Lista",
-            component: () =>
-              import("@/views/Relatorios/ListaRelatorioView.vue"),
+            component: () => import("@/views/Usuarios/UsuariosListagem.vue"),
           },
-        ],
+          {
+            path: "/usuarios/criar",
+            name: "Criar",
+            component: () => import("@/views/Usuarios/NovoUsuarioView.vue"),
+          }
+        ]
       },
       {
-        //  Rotas de espelho
-        path: "/espelho",
-        name: "Espelho",
-        component: () => import("@/views/Espelho/EspelhoPontoView.vue"),
+        path: "/locais",
+        name: "Locais de Trabalho",
+        component: () => import("@/views/Locais/LocaisListagem.vue"),
       },
       {
         // Rotas de perfil
@@ -41,7 +43,7 @@ const routes = [
             path: "/perfil",
             name: "Perfil",
             component: () => import("@/views/Perfil/ConfiguracoesView.vue"),
-          },
+          }
         ],
       },
     ],

@@ -5,15 +5,58 @@
       "name": "Eduardo Oliveira",
       "color": "Laranja",
       "category": "NOC",
-      "price": "799"
+      "price": "7997"
     },
     {
       "id": "b02d",
       "name": "Haildson",
       "color": "Branco",
       "category": "NOC",
-      "price": "7855"
+      "price": "78552"
+    },
+    {
+      "id": "d587",
+      "name": "Antonio",
+      "color": "Branco",
+      "category": "NOC",
+      "price": "7775252"
     }
   ],
-  "enderecos": []
+  "locais_trabalho": [
+    {
+      "id": "c364",
+      "description": "Espaço cultural",
+      "color": "green",
+      "latlon": "-4.032061998820194, -44.46534694233698",
+      "radius": "20"
+    },
+    {
+      "id": "864a",
+      "description": "Central",
+      "color": "red",
+      "latlon": "-4.039300095455312, -44.46853528493972",
+      "radius": "30"
+    },
+    {
+      "id": "7d97",
+      "description": "Chácara tarumã",
+      "color": "blue",
+      "latlon": "-4.0322185615346084, -44.46204954344523",
+      "radius": "20"
+    },
+    {
+      "id": "b48c",
+      "description": "Magazine Luiza",
+      "color": "cyan",
+      "latlon": "-4.034811282796596, -44.46657394184906",
+      "radius": "56"
+    },
+    {
+      "id": "b797",
+      "description": "Alves Cardoso",
+      "color": "blue",
+      "latlon": "-4.036816087254786, -44.467918625392564",
+      "radius": "30"
+    }
+  ]
 }

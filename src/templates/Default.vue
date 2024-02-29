@@ -1,19 +1,12 @@
 <script setup>
-  import { ref } from "vue";
   import ButtonDrawerMobile from "@/components/Flowbite/ButtonDrawerMobile.vue";
   import DrawerMobile from "@/components/Flowbite/DrawerMobile.vue";
   import iconComponent from "@/components/Fontawesome/IconComponent.vue";
 
-  const dark = ref(localStorage.getItem("darkMode") === "true" ? "dark" : "");
-
-  const updateTheme = (valor) => {
-    dark.value = valor ? "dark" : "";
-  };
 </script>
 <template>
-  <div :class="dark" class="bg-gray-100 text-white">
+  <div class="bg-gray-100 text-white">
     <router-view
-      @darkMode="updateTheme"
       class="isMobile overflow-auto p-4 bg-gray-100 dark:bg-gray-900"
     ></router-view>
 
@@ -21,16 +14,18 @@
       <ButtonDrawerMobile to="/" nome="Ponto"
         ><iconComponent icon="clock"
       /></ButtonDrawerMobile>
-      <ButtonDrawerMobile to="/relatorios/lista" nome="Relatório"
+      <ButtonDrawerMobile to="" nome="Relatório"
         ><iconComponent icon="file-lines"
       /></ButtonDrawerMobile>
-      <ButtonDrawerMobile to="/espelho" nome="Espelho"
+      <ButtonDrawerMobile to="" nome="Espelho"
         ><iconComponent icon="list-check"
       /></ButtonDrawerMobile>
-      <ButtonDrawerMobile to="/perfil" nome="Perfil"
-        ><iconComponent icon="user"
+      <ButtonDrawerMobile to="/perfil" nome="Configs"
+        ><iconComponent icon="gears"
       /></ButtonDrawerMobile>
     </DrawerMobile>
+
+    <ProfileDrawer />
   </div>
 </template>
 <style scoped>

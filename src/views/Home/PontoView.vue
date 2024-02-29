@@ -28,7 +28,7 @@
         class="max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       >
         <div class="h-80">
-          <div ref="mapa" class="p-0 w-full rounded-lg h-full"></div>
+          <div ref="mapa" style="z-index: 5;" class="p-0 w-full rounded-lg h-full"></div>
         </div>
       </div>
 
@@ -60,45 +60,24 @@
   import L from "leaflet";
   import "leaflet/dist/leaflet.css";
   import MarkerIcon from "@/assets/marker-icon.png";
+  import {LocationStore} from "../../stores/Locais/locationStore.js";
+
+  const storeLocales = LocationStore();
 
   const horario = ref("...");
   const userLocation = ref({ lat: null, lon: null });
   let mapaContainer = null; //mapa
   const geoLocation = navigator.geolocation; //geolocalização
   const mapa = ref();
-  const cercasUserAutorized = ref([
-    {
-      latlon: [-4.028018584461849, -44.46539775893618],
-      description: "Cerca 2",
-      radius: 26,
-      color: "red",
-    },
-    {
-      latlon: [-4.037639011196118, -44.465870701830674],
-      description: "Rua ipanema",
-      radius: 20,
-      color: "orange",
-    },
-    {
-      latlon: [-4.029238264916777, -44.46241279292012],
-      description: "Rua do brejo",
-      radius: 20,
-      color: "green",
-    },
-    {
-      latlon: [-4.0392746735410725, -44.46849812891654],
-      description: "Central CAS",
-      radius: 50,
-      color: "purple",
-    },
-  ]);
+  const cercasUserAutorized = ref([]);
   let iconMarker = L.icon({
     iconUrl: MarkerIcon,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
   });
-  // -------------------------------------------------------//
+
+  // -------------------------------------------------------------------------//
   function getDataLocal() {
     // Relogio
     const data = new Date();
@@ -107,17 +86,19 @@
 
   setInterval(getDataLocal, 1000);
 
-  function initializeComponents(lat, lon) {
+  async function initializeComponents(lat, lon) {
+    cercasUserAutorized.value = await storeLocales.getLocations();
     createMarker(lat, lon, "Sua Localização");
     userLocation.value = {
       lat,
       lon,
     };
     cercasUserAutorized.value.forEach((cerca) => {
-      createCircle(cerca.latlon, cerca.radius, cerca.description, cerca.color);
+      createCircle([cerca.latlon.split(",")[0], cerca.latlon.split(",")[1]], cerca.radius, cerca.description, cerca.color);
     });
   }
   async function initMap(lat, lon) {
+    
     if (mapaContainer == null) {
       mapaContainer = await L.map(mapa.value).setView([lat, lon], 16);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {

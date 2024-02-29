@@ -25,7 +25,7 @@
             </svg>
             <a href="#"
               class="ms-1 text-sm font-medium text-gray-900 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Listagem
-              de usuários</a>
+              de locais</a>
           </div>
         </li>
       </ol>
@@ -44,65 +44,55 @@
           </tr>
         </TheadComponent>
         <tbody>
-          <tr v-for="produto in storeUsers.users" :key="produto.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <tr v-for="location in storeLocales.locations" :key="location.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              {{ produto.name }}
+              {{ location.description }}
             </th>
-            <td class="px-6 py-4">{{ produto.color }}</td>
-            <td class="px-6 py-4">{{ produto.category }}</td>
-            <td class="px-6 py-4">{{ produto.price }}</td>
+            <td class="px-6 py-4">{{ location.color }}</td>
+            <td class="px-6 py-4">{{ location.latlon }}</td>
+            <td class="px-6 py-4">{{ location.radius }}</td>
             <td class="px-6 py-4 text-right">
-              <a href="javascript:void(0)" @click="storeUsers.deleteUser(produto.id)" class="font-medium mr-3 text-red-600 dark:text-red-500 hover:underline">Deletar</a>
-              <a href="javascript:void(0)" @click="editarUsuario(produto.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+              <a href="javascript:void(0)" @click="storeLocales.deleteLocation(location.id)" class="font-medium mr-3 text-red-600 dark:text-red-500 hover:underline">Deletar</a>
+              <a href="javascript:void(0)" @click="editarUsuario(location.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
             </td>
           </tr>
         </tbody>
       </TableComponent>
     </div>
-    <Modal ref="modalNovoUsuario" modalName="Novo usuário" buttonName="Novo usuário" colorButton="bg-blue-700">
-      <EspelhoPontoView :editUser="usuario_editar" @userCreated="modalNovoUsuario.toggleModal()" />
+    <Modal ref="modalNovoLocal" modalName="Novo local" buttonName="Novo local" colorButton="bg-blue-700">
+      <NovoLocalView @userCreated="modalNovoLocal.toggleModal()" />
     </Modal>
     <div data-dial-init class="fixed end-4 bottom-20 group">
       <button type="button"
         aria-expanded="false"
-        @click="novoUsuario"
+        @click="novoLocal"
         class="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
         <svg class="w-5 h-5 transition-transform group-hover:rotate-45" aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M9 1v16M1 9h16" />
         </svg>
-        <span class="sr-only">Novo usuário</span>
+        <span class="sr-only">Novo local</span>
       </button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import TableComponent from '@/components/Flowbite/Table/TableComponent.vue';
 import TheadComponent from '@/components/Flowbite/Table/TheadComponent.vue';
 import ThComponent from '@/components/Flowbite/Table/ThComponent.vue';
 import Modal from '@/components/Flowbite/Modal.vue';
-import EspelhoPontoView from '@/views/Espelho/EspelhoPontoView.vue';
-import { userStore } from '@/stores/Usuarios/userStore.js'
-const storeUsers = userStore();
+import NovoLocalView from '../Locais/NovoLocalView.vue';
+import { LocationStore } from '../../stores/Locais/locationStore';
+const storeLocales = LocationStore();
 
-const modalNovoUsuario = ref(null); //  do caralho
-const usuario_editar = ref(null);
+const modalNovoLocal = ref(null); //  do caralho
 
-onMounted(() => {
-  storeUsers.getUsers();
-})
 
-const editarUsuario = (id) => {
-  usuario_editar.value = id
-  modalNovoUsuario.value.toggleModal()
-}
-
-const novoUsuario = () => {
-  usuario_editar.value = null
-  modalNovoUsuario.value.toggleModal()
+const novoLocal = () => {
+  modalNovoLocal.value.toggleModal()
 }
 
 </script>
