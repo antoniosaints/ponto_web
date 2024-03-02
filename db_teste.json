@@ -20,6 +20,20 @@
       "color": "Branco",
       "category": "T.I",
       "price": "77752"
+    },
+    {
+      "id": "1a46",
+      "name": "Jeferson",
+      "color": "Branco",
+      "category": "NOC",
+      "price": "4557"
+    },
+    {
+      "id": "a208",
+      "name": "Eduardo",
+      "color": "Verde",
+      "category": "NOC",
+      "price": "5222"
     }
   ],
   "locais_trabalho": [
@@ -50,6 +64,20 @@
       "color": "cyan",
       "latlon": "-4.034811282796596, -44.46657394184906",
       "radius": "56"
+    },
+    {
+      "id": "eaa0",
+      "description": "Praça do piqui",
+      "color": "#17b563",
+      "latlon": "-4.010183428197559, -44.46020459875478",
+      "radius": "10"
+    },
+    {
+      "id": "2812",
+      "description": "TOca",
+      "color": "#eb24b6",
+      "latlon": "-4.040171301366034, -44.465544304316616",
+      "radius": "30"
     }
   ]
 }

@@ -4,7 +4,7 @@
       <FormRow>
         <FormCol>
           <InputTextForm v-model="locationForm.description" label="Nome" type="text" placeholder="Nome" required />
-          <InputTextForm v-model="locationForm.color" label="Cor" type="text" placeholder="Cor" required />
+          <InputColor v-model="locationForm.color" label="Cor" required />
           <InputTextForm v-model="locationForm.latlon" label="Lat / Lon" type="text" placeholder="-0.000000, -0.000000" required />
           <InputTextForm v-model="locationForm.radius" label="Raio" type="number" placeholder="Raio" required />
         </FormCol>
@@ -15,24 +15,25 @@
 </template>
 
 <script setup>
+import { reactive } from "vue";
 import FormContainer from "@/components/Flowbite/Form/FormContainer.vue";
 import InputTextForm from "@/components/Flowbite/Form/InputTextForm.vue";
+import InputColor from "@/components/Flowbite/Form/InputColor.vue";
 import FormCol from "@/components/Flowbite/Form/FormCol.vue";
 import FormRow from "@/components/Flowbite/Form/FormRow.vue";
-import { ref } from "vue";
 
 // stores
 import { LocationStore } from "@/stores/Locais/locationStore"; 
 const localStore = LocationStore();
 
-const locationForm = ref({
+const locationForm = reactive({
   description: "",
-  color: "",
+  color: "#2563eb",
   latlon: "",
   radius: "",
 });
 
 const submited = async () => {
-    localStore.storeLocation(locationForm.value);
+    localStore.storeLocation(locationForm);
 };
 </script>
