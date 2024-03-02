@@ -186,14 +186,14 @@
     }
   };
 
-  function verifyLocation() {
+  async function verifyLocation() {
     let isLocationAutorized = [];
     cercasUserAutorized.value.forEach((cerca) => {
       const distance = calculateDistance(
         userLocation.value.lat,
         userLocation.value.lon,
-        cerca.latlon[0],
-        cerca.latlon[1]
+        cerca.latlon.split(",")[0],
+        cerca.latlon.split(",")[1]
       );
 
       if (distance <= cerca.radius) {

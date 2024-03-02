@@ -79,7 +79,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onUpdated, ref } from 'vue';
 import TableComponent from '@/components/Flowbite/Table/TableComponent.vue';
 import TheadComponent from '@/components/Flowbite/Table/TheadComponent.vue';
 import ThComponent from '@/components/Flowbite/Table/ThComponent.vue';
@@ -90,6 +90,9 @@ const storeLocales = LocationStore();
 
 const modalNovoLocal = ref(null); //  do caralho
 
+onUpdated(() => {
+  storeLocales.getLocations();
+})
 
 const novoLocal = () => {
   modalNovoLocal.value.toggleModal()
