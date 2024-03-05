@@ -12,8 +12,9 @@
 
     <span
       href="#"
-      class="block mb-4 p-4 bg-gray-300 rounded-lg shadow dark:bg-gray-700"
+      class="flex justify-between mb-4 p-4 bg-gray-300 rounded-lg shadow dark:bg-gray-700"
     >
+    <div class="flex flex-col">
       <h5
         id="relogio_ponto"
         class="mb-2 text-4xl dark:text-white text-gray-900 font-bold tracking-tight"
@@ -21,6 +22,17 @@
         {{ horario }}
       </h5>
       <p class="font-normal text-gray-800 dark:text-gray-300">Horário atual</p>
+    </div>
+    <div class="flex flex-col justify-end text-end">
+      <h5
+        id="relogio_ponto"
+        class="mb-2 text-4xl dark:text-white text-gray-900 font-bold tracking-tight"
+      >
+        {{ dataMes }}
+      </h5>
+      <p class="font-normal text-gray-800 dark:text-gray-300">{{ diaSemana }}</p>
+    </div>
+      
     </span>
 
     <div class="d-flex text-right p-0">
@@ -65,10 +77,14 @@
   import "leaflet/dist/leaflet.css";
   import MarkerIcon from "@/assets/marker-icon.png";
   import { LocationStore } from "@/stores/Locais/locationStore.js";
+  import { batidasStore } from "@/stores/Ponto/batidasStore";
 
   const storeLocales = LocationStore();
+  const storeBatidas = batidasStore();
 
   const horario = ref("...");
+  const dataMes = ref("...");
+  const diaSemana = ref("...");
   const userLocation = ref({ lat: null, lon: null });
   let mapaContainer = null; //mapa
   const geoLocation = navigator.geolocation; //geolocalização
@@ -86,6 +102,8 @@
     // Relogio
     const data = new Date();
     horario.value = data.toLocaleTimeString(); // 10/10/2022, 10:10:35
+    dataMes.value = data.toLocaleDateString(); // 10/10/2022
+    diaSemana.value = data.toLocaleDateString("pt-BR", { weekday: "long" });
   }
 
   setInterval(getDataLocal, 1000);
@@ -223,6 +241,7 @@
       const valor = isLocationAutorized.find(
         (item) => item.isCheck === true
       ).description;
+      await storeBatidas.saveBatida(valor)
       alert(`Ponto registrado no local de trabalho: ${valor}`);
     } else {
       alert("Você não está dentro de um local de trabalho cadastrado!");
