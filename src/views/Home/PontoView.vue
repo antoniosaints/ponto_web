@@ -28,7 +28,11 @@
         class="max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       >
         <div class="h-80">
-          <div ref="mapa" style="z-index: 5;" class="p-0 w-full rounded-lg h-full"></div>
+          <div
+            ref="mapa"
+            style="z-index: 5"
+            class="p-0 w-full rounded-lg h-full"
+          ></div>
         </div>
       </div>
 
@@ -60,7 +64,7 @@
   import L from "leaflet";
   import "leaflet/dist/leaflet.css";
   import MarkerIcon from "@/assets/marker-icon.png";
-  import {LocationStore} from "../../stores/Locais/locationStore.js";
+  import { LocationStore } from "@/stores/Locais/locationStore.js";
 
   const storeLocales = LocationStore();
 
@@ -94,11 +98,15 @@
       lon,
     };
     cercasUserAutorized.value.forEach((cerca) => {
-      createCircle([cerca.latlon.split(",")[0], cerca.latlon.split(",")[1]], cerca.radius, cerca.description, cerca.color);
+      createCircle(
+        [cerca.latlon.split(",")[0], cerca.latlon.split(",")[1]],
+        cerca.radius,
+        cerca.description,
+        cerca.color
+      );
     });
   }
   async function initMap(lat, lon) {
-    
     if (mapaContainer == null) {
       mapaContainer = await L.map(mapa.value).setView([lat, lon], 16);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
