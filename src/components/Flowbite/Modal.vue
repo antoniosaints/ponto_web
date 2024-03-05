@@ -11,7 +11,7 @@
         {{ buttonName }}
       </button>
     </div>
-  
+
     <!-- Main modal -->
     <div
       :id="modalId"
@@ -62,48 +62,48 @@
 </template>
 
 <script>
-import { ref } from "vue";
+  import { ref } from "vue";
 
-export default {
-  props: {
-    modalName: {
-      type: String,
-      required: true,
+  export default {
+    props: {
+      modalName: {
+        type: String,
+        required: true,
+      },
+      buttonName: {
+        type: String,
+        required: true,
+        default: "Texto do botão (buttonName)",
+      },
+      colorButton: {
+        type: String,
+        required: true,
+        default: "bg-blue-700",
+      },
+      showButton: {
+        type: Boolean,
+        default: false,
+      },
     },
-    buttonName: {
-      type: String,
-      required: true,
-      default: "Texto do botão (buttonName)",
+    setup() {
+      const isModalOpen = ref(false);
+      const modalId = `modal_${Math.random().toString(36).substr(2, 9)}`;
+
+      const toggleModal = () => {
+        isModalOpen.value = !isModalOpen.value;
+      };
+
+      const deleteProduct = () => {
+        // Delete logic goes here
+        console.log("Product deleted");
+      };
+
+      return {
+        isModalOpen,
+        modalId,
+        toggleModal,
+        deleteProduct,
+      };
     },
-    colorButton: {
-      type: String,
-      required: true,
-      default: "bg-blue-700",
-    },
-    showButton: {
-      type: Boolean,
-      default: false,
-    }
-  },
-  setup() {
-    const isModalOpen = ref(false);
-    const modalId = `modal_${Math.random().toString(36).substr(2, 9)}`;
-
-    const toggleModal = () => {
-      isModalOpen.value = !isModalOpen.value;
-    };
-
-    const deleteProduct = () => {
-      // Delete logic goes here
-      console.log("Product deleted");
-    };
-
-    return {
-      isModalOpen,
-      modalId,
-      toggleModal,
-      deleteProduct,
-    };
-  },
-};
+  };
 </script>
