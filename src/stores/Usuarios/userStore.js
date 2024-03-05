@@ -70,3 +70,10 @@ export const userStore = defineStore("userStore", () => {
     deleteUser,
   };
 });
+
+export const userMockStore = defineStore("userMockStore", () => {
+  const users = ref([]);
+  return {
+    users,
+  }
+})

@@ -85,7 +85,7 @@ import TheadComponent from '@/components/Flowbite/Table/TheadComponent.vue';
 import ThComponent from '@/components/Flowbite/Table/ThComponent.vue';
 import Modal from '@/components/Flowbite/Modal.vue';
 import NovoUsuario from '@/views/Usuarios/NovoUsuarioView.vue';
-import { userStore } from '@/stores/Usuarios/userStore.js'
+import { userStore } from '@/stores/Usuarios/userStore';
 const storeUsers = userStore();
 
 const modalNovoUsuario = ref(null); //  do caralho
