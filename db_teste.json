@@ -24,6 +24,13 @@
       "color": "Branco",
       "category": "T.I",
       "price": "77752"
+    },
+    {
+      "id": "a9b8",
+      "name": "Admin",
+      "color": "Azul",
+      "category": "Admin",
+      "price": "5252"
     }
   ],
   "locais_trabalho": [
@@ -95,8 +102,10 @@
       "usuario": "41",
       "batidas": [
         "07:56",
-        "07:56",
-        "08:22"
+        "08:22",
+        "08:37",
+        "10:22",
+        "15:11"
       ],
       "local": "Central"
     }
