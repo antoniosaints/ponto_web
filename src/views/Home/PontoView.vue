@@ -101,7 +101,7 @@
   function getDataLocal() {
     // Relogio
     const data = new Date();
-    horario.value = data.toLocaleTimeString(); // 10/10/2022, 10:10:35
+    horario.value = data.toLocaleTimeString("pt-BR"); // 10:10:35
     dataMes.value = data.toLocaleDateString(); // 10/10/2022
     diaSemana.value = data.toLocaleDateString("pt-BR", { weekday: "long" });
   }
