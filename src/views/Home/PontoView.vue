@@ -23,10 +23,10 @@
       </h5>
       <p class="font-normal text-gray-800 dark:text-gray-300">Horário atual</p>
     </div>
-    <div class="flex flex-col justify-end text-end">
+    <div class="flex flex-col justify-center text-end">
       <h5
         id="relogio_ponto"
-        class="mb-2 text-4xl dark:text-white text-gray-900 font-bold tracking-tight"
+        class="text-2xl dark:text-gray-300 text-gray-900 font-bold tracking-tight"
       >
         {{ dataMes }}
       </h5>

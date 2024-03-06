@@ -46,6 +46,23 @@ const routes = [
           }
         ],
       },
+      {
+        // Rotas de espelho
+        path: "/espelho",
+        name: "Espelho",
+        component: () => import("@/views/Espelho/EspelhoPontoVIew.vue")
+      },
+      {
+        path: "/relatorios",
+        name: "Relatórios",
+        children: [
+          {
+            path: "/relatorios/usuarios",
+            name: "Relatorio de Usuários",
+            component: () => import("@/views/Relatorios/RelatorioUsuarioView.vue"),
+          }
+        ]
+      }
     ],
   },
   {
