@@ -14,10 +14,10 @@
       <ButtonDrawerMobile to="/" nome="Ponto"
         ><iconComponent icon="clock"
       /></ButtonDrawerMobile>
-      <ButtonDrawerMobile to="" nome="Relatório"
+      <ButtonDrawerMobile to="/relatorios/usuarios" nome="Relatório"
         ><iconComponent icon="file-lines"
       /></ButtonDrawerMobile>
-      <ButtonDrawerMobile to="" nome="Espelho"
+      <ButtonDrawerMobile to="/espelho" nome="Espelho"
         ><iconComponent icon="list-check"
       /></ButtonDrawerMobile>
       <ButtonDrawerMobile to="/perfil" nome="Configs"

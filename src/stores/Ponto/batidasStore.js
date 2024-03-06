@@ -19,9 +19,8 @@ function getData() {
 
   // Converter a data de Horário de Brasília para o formato YYYY-MM-DD HH:ii:ss
   const [data, hora] = dataBrasilia.split(", ");
-  const [mes, dia, ano] = data.split("/");
   const [horas, minutos, segundos] = hora.split(":");
-  const dataFormatada = `${ano}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
+  const dataFormatada = `${horas}:${minutos}`;
 
   return dataFormatada; // Saída: "2024-02-29 11:20:00" (para 29 de fevereiro de 2024 às 11:20:00 no Horário de Brasília)
 }
@@ -33,13 +32,13 @@ export const batidasStore = defineStore("batidasStore", () => {
 
   const saveBatida = async (local) => {
     const batida = getData();
-    const pontoHoje = await httpService(
+    const [pontoHoje] = await httpService(
       `batidas?data=${hoje}&usuario=${usuarioLogado}`
     );
 
-    if (pontoHoje.length > 0) {
-      pontoHoje[0].batidas.push(batida);
-      await httpService(`batidas/${pontoHoje[0].id}`, "PATCH", pontoHoje[0]);
+    if (pontoHoje) {
+      pontoHoje.batidas.push(batida);
+      await httpService(`batidas/${pontoHoje.id}`, "PATCH", pontoHoje);
     } else {
       await httpService("batidas", "POST", {
         data: hoje,
