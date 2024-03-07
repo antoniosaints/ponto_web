@@ -2,7 +2,7 @@
   import ButtonDrawerMobile from "@/components/Flowbite/ButtonDrawerMobile.vue";
   import DrawerMobile from "@/components/Flowbite/DrawerMobile.vue";
   import iconComponent from "@/components/Fontawesome/IconComponent.vue";
-
+  defineOptions({ name: "template padrão" });
 </script>
 <template>
   <div class="bg-gray-100 text-white">

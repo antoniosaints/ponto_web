@@ -17,4 +17,5 @@ defineProps({
     to: String,
     nome: String
 })
+defineOptions({ name: "Botão da barra de navegação mobile" });
 </script>

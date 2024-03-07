@@ -7,17 +7,8 @@
       "paths": {
         "@/*": [
           "src/*"
-        ],
-        "@/components/*": [
-          "src/components/*"
         ]
-      },
-      "lib": [
-        "esnext",
-        "dom",
-        "dom.iterable",
-        "scripthost"
-      ]
+      }
     }
   }
   
