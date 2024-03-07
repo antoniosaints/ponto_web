@@ -7,3 +7,7 @@
     </div>
   </div>
 </template>
+
+<script setup>
+defineOptions({ name: "Barra de navegação mobile" });
+</script>

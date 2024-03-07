@@ -16,4 +16,6 @@ const props = defineProps({
     }
 })
 
+defineOptions({ name: "Icone" });
+
 </script>
