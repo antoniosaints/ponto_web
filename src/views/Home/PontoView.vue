@@ -77,7 +77,7 @@
   import "leaflet/dist/leaflet.css";
   import MarkerIcon from "@/assets/marker-icon.png";
   import { LocationStore } from "@/stores/Locais/locationStore.js";
-  import { batidasStore } from "@/stores/Ponto/batidasStore";
+  import { batidasStore } from "@/stores/Ponto/batidasStore.js";
 
   const storeLocales = LocationStore();
   const storeBatidas = batidasStore();
