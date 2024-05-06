@@ -1,8 +1,18 @@
-import { createApp } from 'vue'
+import { createApp, onMounted } from 'vue'
 import App from './App.vue'
 import Router from './routes/Router.js'
 import { createPinia } from 'pinia'
 import "../src/pluguins/Fontawesome/IconsPluguin.js"
 import './index.css'
+import { useLoginStore } from './stores/login'
 
-createApp(App).use(createPinia()).use(Router).mount('#app')
+const app = createApp(App);
+app.use(createPinia());
+
+(async () => {
+    await useLoginStore().checkToken();
+})();
+
+app.use(Router);
+app.mount('#app');
+

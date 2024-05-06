@@ -37,23 +37,26 @@
         <TheadComponent>
           <tr>
             <ThComponent> Nome </ThComponent>
-            <ThComponent> Cor </ThComponent>
-            <ThComponent> Categoria </ThComponent>
-            <ThComponent> Valor </ThComponent>
+            <ThComponent> E-mail </ThComponent>
+            <ThComponent> Contato </ThComponent>
+            <ThComponent> Horário </ThComponent>
             <ThComponent alinhar="justify-end"> Opções </ThComponent>
           </tr>
         </TheadComponent>
         <tbody>
-          <tr v-for="produto in storeUsers.users" :key="produto.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <tr v-for="usuario in storeUsers.users.data" :key="usuario.id"
+            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              {{ produto.name }}
+              {{ usuario.nome }}
             </th>
-            <td class="px-6 py-4">{{ produto.color }}</td>
-            <td class="px-6 py-4">{{ produto.category }}</td>
-            <td class="px-6 py-4">{{ produto.price }}</td>
+            <td class="px-6 py-4">{{ usuario.email || 'Não informado' }}</td>
+            <td class="px-6 py-4">{{ usuario.contato || 'Não informado' }}</td>
+            <td class="px-6 py-4">{{ usuario.horario || 'Não informado' }}</td>
             <td class="px-6 py-4 text-right">
-              <a href="javascript:void(0)" @click="storeUsers.deleteUser(produto.id)" class="font-medium mr-3 text-red-600 dark:text-red-500 hover:underline">Deletar</a>
-              <a href="javascript:void(0)" @click="editarUsuario(produto.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+              <a href="javascript:void(0)" @click="storeUsers.deleteUser(usuario.id)"
+                class="font-medium mr-3 text-red-600 dark:text-red-500 hover:underline">Deletar</a>
+              <a href="javascript:void(0)" @click="editarUsuario(usuario.id)"
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
             </td>
           </tr>
         </tbody>
@@ -63,9 +66,7 @@
       <NovoUsuario @userCreated="modalNovoUsuario.toggleModal()" />
     </Modal>
     <div data-dial-init class="fixed end-4 bottom-20 group">
-      <button type="button"
-        aria-expanded="false"
-        @click="novoUsuario"
+      <button type="button" aria-expanded="false" @click="novoUsuario"
         class="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
         <svg class="w-5 h-5 transition-transform group-hover:rotate-45" aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -90,8 +91,8 @@ const storeUsers = userStore();
 
 const modalNovoUsuario = ref(null); //  do caralho
 
-onMounted(() => {
-  storeUsers.getUsers();
+onMounted(async () => {
+  await storeUsers.getUsers();
 })
 
 const editarUsuario = async (id) => {

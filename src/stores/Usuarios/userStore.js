@@ -6,24 +6,24 @@ export const userStore = defineStore("userStore", () => {
   const users = ref([]);
   const userEdit = ref(null);
 
+  const defaultUser = {
+    nome: "",
+    email: "",
+    contato: "",
+    horario: "",
+  }
+
   const dataUserStore = ref({
-    name: "",
-    color: "",
-    category: "",
-    price: "",
+    ...defaultUser
   });
-  
+
   const setUserEdit = async (value) => {
     userEdit.value = value;
     if (value !== null) {
-        dataUserStore.value = await getUser(value);
-    }else {
-        dataUserStore.value = {
-            name: "",
-            color: "",
-            category: "",
-            price: "",
-        }
+      const { data } = await getUser(value);
+      dataUserStore.value = data;
+    } else {
+      dataUserStore.value = defaultUser;
     }
   };
 
@@ -34,7 +34,7 @@ export const userStore = defineStore("userStore", () => {
   };
 
   const getUser = async (id) => {
-    return await httpService(`usuarios/${id}`);
+    return await httpService(`usuarios?id=${id}`);
   };
 
   const storeUser = async () => {
@@ -45,12 +45,7 @@ export const userStore = defineStore("userStore", () => {
   const updateUser = async (id) => {
     await httpService(`usuarios/${id}`, "PATCH", dataUserStore.value);
     await getUsers();
-    dataUserStore.value = {
-        name: "",
-        color: "",
-        category: "",
-        price: "",
-    }
+    dataUserStore.value = defaultUser;
   };
 
   const deleteUser = async (id) => {

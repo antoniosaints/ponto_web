@@ -2,10 +2,10 @@
   <div class="p-4">
     <div class="py-4 overflow-y-auto">
       <ul class="space-y-2 font-medium">
-        <MenuLink icon="clock" label="Ponto" to="/" />
-        <MenuLink icon="location-dot" label="Locais de trabalho" to="/locais" />
-        <MenuLink icon="user" label="Usuários" to="/usuarios/lista" />
-        <MenuLink icon="right-from-bracket" label="Sair" to="/login" />
+        <MenuLink icon="clock" label="Ponto" para="/" />
+        <MenuLink icon="location-dot" label="Locais de trabalho" para="/locais" />
+        <MenuLink icon="user" label="Usuários" para="/usuarios/lista" />
+        <MenuLink icon="right-from-bracket" @click="useLoginStore().logout()" label="Sair" />
       </ul>
     </div>
     <hr>
@@ -26,7 +26,6 @@
         <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Salvar login</span>
       </label>
     </div>
-    <ProfileDrawer />
   </div>
 </template>
 
@@ -34,6 +33,7 @@
 import { ref } from "vue";
 import MenuLink from "@/components/Flowbite/Menu/MenuLink.vue";
 import { useMainStore } from "@/stores/main";
+import { useLoginStore } from "@/stores/login";
 const store = useMainStore();
 
 const darkMode = ref(localStorage.getItem("darkMode"));
