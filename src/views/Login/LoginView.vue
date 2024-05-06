@@ -11,27 +11,17 @@
       </p>
     </div>
 
-    <form class="w-full max-w-lg bg-slate-100 dark:bg-gray-900">
-      <div class="mb-5">
-        <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecione a unidade</label>
-        <select id="countries"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option selected>Escolher ...</option>
-          <option value="US">United States</option>
-          <option value="CA">Canada</option>
-          <option value="FR">France</option>
-          <option value="DE">Germany</option>
-        </select>
-      </div>
+    <form class="w-full max-w-lg bg-slate-100 dark:bg-gray-900" @submit.prevent="auth">
+
       <div class="mb-5">
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
-        <input type="email" id="email"
+        <input type="email" id="email" v-model="user.email"
           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
           placeholder="usuario@dominio" required />
       </div>
       <div class="mb-5">
-        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
-        <input type="password" id="password" placeholder="•••••••••"
+        <label for="senha" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
+        <input type="senha" id="senha" placeholder="•••••••••" v-model="user.senha"
           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
           required />
       </div>
@@ -50,3 +40,27 @@
     </form>
   </div>
 </template>
+
+<script setup>
+import router from '@/routes/Router';
+import toast from '@/services/toast';
+import { useLoginStore } from '@/stores/login';
+import { reactive } from 'vue';
+
+const user = reactive({
+  email: '',
+  senha: ''
+})
+
+
+const auth = async () => {
+  const logged = await useLoginStore().login(user);
+  console.log(logged);
+  if (logged.success == true) {
+    router.push({ path: '/' });
+    toast.success(logged.message, 'Logado!');
+  } else {
+    toast.error(logged.message, 'Ops..');
+  }
+}
+</script>

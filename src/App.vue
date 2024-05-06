@@ -5,6 +5,6 @@
 </template>
 
 <script setup>
-  import { useMainStore } from "./stores/main";
-  const store = useMainStore();
+import { useMainStore } from "./stores/main.js";
+const store = useMainStore();
 </script>
